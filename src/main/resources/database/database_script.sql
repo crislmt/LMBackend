@@ -15,7 +15,6 @@ CREATE TABLE movie (
                        title VARCHAR(50),
                        release_date DATE,
                        director VARCHAR(50),
-                       UNIQUE(title, release_date, director)
 );
 
 CREATE TABLE purchase (
@@ -31,8 +30,7 @@ CREATE TABLE movie_in_purchase (
                                    movie INTEGER,
                                    quantity INTEGER,
                                    FOREIGN KEY (purchase) REFERENCES purchase(id),
-                                   FOREIGN KEY (movie) REFERENCES movie(id),
-                                   UNIQUE(purchase, movie)
+                                   FOREIGN KEY (movie) REFERENCES movie(id)
 );
 
 CREATE TABLE genre (
@@ -45,8 +43,7 @@ CREATE TABLE movie_genre(
                             movie INTEGER,
                             genre INTEGER,
                             FOREIGN KEY (movie) REFERENCES movie(id),
-                            FOREIGN KEY (genre) REFERENCES genre(id),
-                            UNIQUE(movie, genre)
+                            FOREIGN KEY (genre) REFERENCES genre(id)
 );
 
 CREATE TABLE actor(
@@ -61,6 +58,5 @@ CREATE TABLE acted_in(
                          actor INTEGER,
                          movie INTEGER,
                          FOREIGN KEY (actor) REFERENCES actor(id),
-                         FOREIGN KEY (movie) REFERENCES movie(id),
-                         UNIQUE(actor, movie)
+                         FOREIGN KEY (movie) REFERENCES movie(id)
 )

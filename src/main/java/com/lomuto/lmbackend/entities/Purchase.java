@@ -24,16 +24,15 @@ public class Purchase {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="buyer")
-    private User buyer;
+    @JoinColumn(name="user")
+    private User user;
 
     @Basic
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date purchaseTime;
 
-    @OneToMany(mappedBy = "purchase", cascade=CascadeType.MERGE)
-    private List<MovieInPurchase> moviesInPurchase;
 
-
+    @OneToMany
+    private List<Movie_Purchase> movies;
 }

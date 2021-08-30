@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="user", schema="store")
 
+//OK
 public class User {
 
     @Id
@@ -45,7 +46,7 @@ public class User {
     @Column(name="address", nullable = true, length = 150)
     private String address;
 
-    @OneToMany(mappedBy="buyer", cascade=CascadeType.MERGE)
+    @OneToMany(mappedBy="user", cascade=CascadeType.MERGE)
     @JsonIgnore
     private List<Purchase> purchases;
 }

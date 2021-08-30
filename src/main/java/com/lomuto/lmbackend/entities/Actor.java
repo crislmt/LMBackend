@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,4 +32,8 @@ public class Actor {
     @Basic
     @Column(name = "nationality", length = 50, nullable = true)
     private String nationality;
+
+    //Fetch type required - TODO
+    @ManyToMany(mappedBy = "actors")
+    private List<Movie> movies;
 }

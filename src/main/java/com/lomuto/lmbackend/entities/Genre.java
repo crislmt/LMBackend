@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,5 +24,9 @@ public class Genre {
     @Basic
     @Column(name="name", nullable=true)
     private String name;
+
+    //Fetch type required - TODO
+    @ManyToMany(mappedBy = "genres")
+    private List<Movie> movies;
 
 }

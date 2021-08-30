@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -13,23 +14,25 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @Entity
-public class MovieInPurchase {
+@Table(name="movie_purchase", schema="store")
+public class Movie_Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable = false)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="purchase")
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JsonIgnore
     @ToString.Exclude
-    private Purchase purchase;
-
-    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name="movie")
     private Movie movie;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @ToString.Exclude
+    @JoinColumn(name="purchase")
+    private Purchase purchase;
+
     @Basic
-    @Column(name="quantity", nullable=true)
+    @Column(name="quantity", nullable = true)
     private int quantity;
 }

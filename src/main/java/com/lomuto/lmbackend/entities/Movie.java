@@ -5,10 +5,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.SortedSet;
 
 
 @Getter
@@ -41,14 +44,24 @@ public class Movie {
     @Column(name="director", length = 50)
     private String director;
 
-    @OneToMany(targetEntity = MovieInPurchase.class, mappedBy = "product", cascade = CascadeType.MERGE)
-    @JsonIgnore
-    @ToString.Exclude
-    private List<MovieInPurchase> moviesInPurchase;
+    @Basic
+    @Column(name="price")
+    private float price;
 
-    //TODO
-    @OneToMany
-    private List<Movie> genres;
-    @OneToMany
-    private List<Actor> actors;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.MERGE)
+    List<Movie_Purchase> purchases;
+
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name="movie_actor", joinColumns = {@JoinColumn(name="movie")}, inverseJoinColumns = {@JoinColumn(name="actor")})
+    List<Actor> actors;
+
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name="movie_genre", joinColumns = {@JoinColumn(name="movie")}, inverseJoinColumns = {@JoinColumn(name="genre")})
+    List<Genre> genres;
+
+    @Version
+    @Column(name="version")
+    @JsonIgnore
+    private long version;
+
 }

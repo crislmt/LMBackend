@@ -17,13 +17,16 @@ import java.util.List;
 @Entity
 @Table(name="user", schema="store")
 
-//OK
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="code", nullable=false)
+    @Column(name="id", nullable=false)
     private int id;
+
+    @Basic
+    @Column(name="username", nullable = false, length = 50)
+    private String username;
 
     @Basic
     @Column(name="first_name", nullable=true, length = 50)
@@ -39,7 +42,7 @@ public class User {
     private Date birth_date;
 
     @Basic
-    @Column(name="email", nullable = true, length = 90)
+    @Column(name="email", nullable = false, length = 90)
     private String email;
 
     @Basic
@@ -48,5 +51,6 @@ public class User {
 
     @OneToMany(mappedBy="user", cascade=CascadeType.MERGE)
     @JsonIgnore
+    @ToString.Exclude
     private List<Purchase> purchases;
 }

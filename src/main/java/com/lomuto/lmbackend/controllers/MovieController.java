@@ -2,7 +2,7 @@ package com.lomuto.lmbackend.controllers;
 
 import com.lomuto.lmbackend.entities.Movie;
 import com.lomuto.lmbackend.exceptions.MovieAlreadyExistsException;
-import com.lomuto.lmbackend.exceptions.MovieDontExistException;
+import com.lomuto.lmbackend.exceptions.NoSuchMovieException;
 import com.lomuto.lmbackend.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class MovieController {
             List<Movie> result=movieService.findByTitle(title);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        catch (MovieDontExistException m){
+        catch (NoSuchMovieException m){
             return new ResponseEntity<>(new ResponseMessage("No such movie"), HttpStatus.BAD_REQUEST );
         }
     }
@@ -52,7 +52,7 @@ public class MovieController {
         try{
             movieService.deleteByTitle(title);
         }
-        catch(MovieDontExistException e){
+        catch(NoSuchMovieException e){
             return new ResponseEntity<>(new ResponseMessage("No movie with such title"), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(new ResponseMessage(title+"has been succesfully cancelled"), HttpStatus.OK);

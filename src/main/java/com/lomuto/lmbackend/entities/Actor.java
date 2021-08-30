@@ -1,5 +1,6 @@
 package com.lomuto.lmbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,7 @@ public class Actor {
 
     //Fetch type required - TODO
     @ManyToMany(mappedBy = "actors")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Movie> movies;
 }

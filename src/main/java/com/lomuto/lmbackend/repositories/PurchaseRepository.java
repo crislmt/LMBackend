@@ -9,9 +9,12 @@ import java.util.List;
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
+    //User
     List<Purchase> findByUser(User user);
+
+    //PurchaseTime
     List<Purchase> findByPurchaseTime(Date date);
     @Query("select p from Purchase p where p.purchaseTime > ?1 and p.purchaseTime < ?2 and p.user = ?3")
-    List<Purchase> findByBuyerInPeriod(Date startDate, Date endDate, User user);
+    List<Purchase> findByUserInPeriod(Date startDate, Date endDate, User user);
 
 }

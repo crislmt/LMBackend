@@ -4,15 +4,10 @@ import com.lomuto.lmbackend.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.lomuto.lmbackend.entities.*;
 import com.lomuto.lmbackend.exceptions.*;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -35,22 +30,15 @@ public class MovieService {
     }
 
     @Transactional(readOnly = false)
-    public void deleteByTitle(String title) throws MovieDontExistException{
-        if(!movieRepository.existsByTitle(title)) throw new MovieDontExistException();
+    public void deleteByTitle(String title) throws NoSuchMovieException {
+        if(!movieRepository.existsByTitle(title)) throw new NoSuchMovieException();
         movieRepository.deleteByTitle(title);
     }
 
     @Transactional(readOnly = true)
-    public List<Movie> findByTitle(String title) throws MovieDontExistException{
-        if(!movieRepository.existsByTitle(title)) throw new MovieDontExistException();
+    public List<Movie> findByTitle(String title) throws NoSuchMovieException {
+        if(!movieRepository.existsByTitle(title)) throw new NoSuchMovieException();
         return movieRepository.findByTitle(title);
 
-    }
-
-    public static void main(String[] args){
-        Movie m1=new Movie();
-        m1.setTitle("Blade Runner");
-        MovieService ms=new MovieService();
-        ms.addMovie(m1);
     }
 }

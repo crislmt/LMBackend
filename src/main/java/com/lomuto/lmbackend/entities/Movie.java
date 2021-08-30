@@ -28,7 +28,7 @@ public class Movie {
     private int id;
 
     @Basic
-    @Column(name="title", length = 50)
+    @Column(name="title", nullable = false, length = 50)
     private String title;
 
     @Basic

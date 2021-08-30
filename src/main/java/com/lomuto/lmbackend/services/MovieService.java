@@ -26,6 +26,26 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
+    @Transactional(readOnly=true)
+    public List<Movie> showAllMovies(){return movieRepository.findAll();}
+
+    @Transactional(readOnly = false) //JUST FOR DEBUGGING TODO
+    public void deleteAllMovie(){
+         movieRepository.deleteAll();
+    }
+
+    @Transactional(readOnly = false)
+    public void deleteByTitle(String title) throws MovieDontExistException{
+        if(!movieRepository.existsByTitle(title)) throw new MovieDontExistException();
+        movieRepository.deleteByTitle(title);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Movie> findByTitle(String title) throws MovieDontExistException{
+        if(!movieRepository.existsByTitle(title)) throw new MovieDontExistException();
+        return movieRepository.findByTitle(title);
+
+    }
 
     public static void main(String[] args){
         Movie m1=new Movie();

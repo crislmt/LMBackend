@@ -49,6 +49,7 @@ public class Movie {
     private float price;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.MERGE)
+    @JsonIgnore
     List<Movie_Purchase> purchases;
 
     @ManyToMany(cascade=CascadeType.MERGE)

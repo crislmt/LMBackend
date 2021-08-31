@@ -5,4 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
+
+    //Name
+    Actor findByName(String name);
+    boolean existsByName(String name);
+
 }

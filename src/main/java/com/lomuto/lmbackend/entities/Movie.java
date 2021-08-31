@@ -5,13 +5,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.SortedSet;
 
 
 @Getter
@@ -36,9 +33,8 @@ public class Movie {
     private int quantity;
 
     @Basic
-    @Column(name="release_date")
-    @Temporal(TemporalType.DATE)
-    private Date release_date;
+    @Column(name= "release_year")
+    private int release_year;
 
     @Basic
     @Column(name="director", length = 50)

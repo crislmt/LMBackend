@@ -34,17 +34,25 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Page<Movie> findByGenre(String genre, Pageable pageable);
 
     //Actor
-    @Query(value="select m from Movie m inner join m.actors a where a.first_name like :name and a.last_name like :surname")
-    Page<Movie> findByActorLikePage(String name, String surname);
-    @Query(value="select m from Movie m inner join m.actors a where a.first_name like :name and a.last_name like :surname")
-    List<Movie> findByActorLike(String name, String surname);
+    @Query(value="select m from Movie m inner join m.actors a where a.name like :name")
+    Page<Movie> findByActorLikePage(String name, Pageable pageable);
+    @Query(value="select m from Movie m inner join m.actors a where a.name like :name")
+    List<Movie> findByActorLike(String name);
 
-    //NATIVE QUERY, CHANGE IT ASAP. List is for debug TODO
-    @Query(value="select * from Movie as m where year(m.release_date)=?0", nativeQuery = true)
+    //Year
+    @Query(value="select m from Movie m where m.release_year=:year")
     Page<Movie> findByReleaseDatePage(int year, Pageable pageable);
-    @Query(value="select * from Movie as m where year(m.release_date)=?0", nativeQuery = true)
+    @Query(value="select m from Movie m where m.release_year=:year")
     List<Movie> findByReleaseDate(int year);
 
-    //AdvanceResearch TODO
-    //Ricerca per: Titolo, Prezzo,
+    //AdvancedSearch
+    @Query( value= "select m from Movie m inner join m.actors a inner join m.genres g " +
+            "where (:title is null or m.title like :title) and" +
+            "(:maxPrice is null or m.price<=:maxPrice) and " +
+            "(:minPrice is null or m.price>=:minPrice) and" +
+            "(:releaseYear is null or m.release_year=:releaseYear) and" +
+            "(:director is null or m.director=:director) and" +
+            "(:actor is null or a.name like :actor) and"+
+            "(:genre is null or g.name like :genre)")
+    List<Movie> advancedSearch(String title, int maxPrice, int minPrice, int releaseYear, String director, String genre, String actor);
 }

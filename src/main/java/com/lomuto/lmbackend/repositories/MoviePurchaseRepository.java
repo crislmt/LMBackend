@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface Movie_PurchaseRepository extends JpaRepository<Movie_Purchase, Integer> {
+public interface MoviePurchaseRepository extends JpaRepository<com.lomuto.lmbackend.entities.MoviePurchase, Integer> {
 }

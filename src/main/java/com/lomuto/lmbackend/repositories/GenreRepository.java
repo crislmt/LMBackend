@@ -9,5 +9,4 @@ public interface GenreRepository extends JpaRepository<Genre, Integer> {
     //Name
     Genre findByName(String name);
     boolean existsByName(String name);
-
 }

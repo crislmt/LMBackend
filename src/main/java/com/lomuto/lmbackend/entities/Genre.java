@@ -23,11 +23,10 @@ public class Genre {
     private int id;
 
     @Basic
-    @Column(name="name", nullable=true)
+    @Column(name="name", nullable=false, unique = true)
     private String name;
 
-    //Fetch type required - TODO
-    @ManyToMany(mappedBy = "genres")
+    @ManyToMany(mappedBy = "genres", cascade = {CascadeType.MERGE})
     @JsonIgnore
     @ToString.Exclude
     private List<Movie> movies;

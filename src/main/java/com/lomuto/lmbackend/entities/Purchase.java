@@ -27,12 +27,12 @@ public class Purchase {
     @JoinColumn(name="user")
     private User user;
 
+    @OneToMany(mappedBy = "purchase", cascade = {CascadeType.MERGE})
+    private List<MoviePurchase> purchaseMovies;
+
     @Basic
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date purchaseTime;
 
-
-    @OneToMany
-    private List<Movie_Purchase> movies;
 }

@@ -29,21 +29,22 @@ public class User {
     private String username;
 
     @Basic
+    @Column(name="email", nullable = false, length = 90)
+    private String email;
+
+    @Basic
     @Column(name="first_name", nullable=true, length = 50)
-    private String first_name;
+    private String firstName;
 
     @Basic
     @Column(name="last_name", nullable=true, length = 50)
-    private String last_name;
+    private String lastName;
 
     @Basic
     @Temporal(TemporalType.DATE)
     @Column(name="birth_date", nullable=true)
-    private Date birth_date;
+    private Date birthDate;
 
-    @Basic
-    @Column(name="email", nullable = false, length = 90)
-    private String email;
 
     @Basic
     @Column(name="address", nullable = true, length = 150)

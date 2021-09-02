@@ -23,15 +23,14 @@ public class Actor {
     private int id;
 
     @Basic
-    @Column(name="name", length = 50, nullable = false)
+    @Column(name= "name", length = 100, nullable = false)
     private String name;
 
     @Basic
-    @Column(name = "nationality", length = 50, nullable = true)
+    @Column(name = "nationality", length = 50)
     private String nationality;
 
-    //Fetch type required - TODO
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.MERGE)
     @JsonIgnore
     @ToString.Exclude
     private List<Movie> movies;

@@ -32,7 +32,7 @@ public class MovieController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity getAll(@RequestParam String name,@RequestParam int pageNumber,@RequestParam int pageSize, @RequestParam String sortBy){
+    public ResponseEntity getAll(@RequestParam int pageNumber,@RequestParam int pageSize, @RequestParam String sortBy){
         List<Movie> result=movieService.getAll(pageNumber, pageSize, sortBy);
         if(result.size()==0) return new ResponseEntity<>(new ResponseMessage("No movie found"), HttpStatus.OK);
         return new ResponseEntity<>(result, HttpStatus.OK);

@@ -47,7 +47,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     //AdvancedSearch
     @Query( value= "select distinct m from Movie m inner join m.actors a inner join m.genres g " +
-            "where (:title is null or m.title like :title) and" +
+            "where (:title is null or m.title like %:title%) and" +
             "(:maxPrice is null or m.price<=:maxPrice) and " +
             "(:minPrice is null or m.price>=:minPrice) and" +
             "(:releaseYear is null or m.releaseYear=:releaseYear) and" +

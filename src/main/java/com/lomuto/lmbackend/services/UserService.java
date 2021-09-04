@@ -1,11 +1,9 @@
 package com.lomuto.lmbackend.services;
 
 import com.lomuto.lmbackend.entities.User;
-import com.lomuto.lmbackend.exceptions.UserEmailAlreadyExistsException;
-import com.lomuto.lmbackend.exceptions.UserEmailMissingArgumentException;
-import com.lomuto.lmbackend.exceptions.UserUsernameAlreadyExistsException;
-import com.lomuto.lmbackend.exceptions.UserUsernameMissingArgumentException;
+import com.lomuto.lmbackend.exceptions.*;
 import com.lomuto.lmbackend.repositories.UserRepository;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,5 +28,12 @@ public class UserService {
     @Transactional(readOnly=true)
     public List<User> getAll(User user){
         return userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public User getByEmail(String email) throws NoSuchUserException {
+        List<User> result=userRepository.findByEmail(email);
+        if(result.size()==0) throw new NoSuchUserException();
+        return result.get(0);
     }
 }

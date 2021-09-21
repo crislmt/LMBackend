@@ -50,10 +50,10 @@ public class PurchaseController {
             return new ResponseEntity(p, HttpStatus.OK);
         }
         catch (MovieQuantityUnavailableException e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity not available");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity issue");
         }
         catch(NoSuchUserException e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such user, invalid access token");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authentication issue");
         }
     }
 }

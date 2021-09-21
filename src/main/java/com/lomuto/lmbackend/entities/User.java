@@ -41,12 +41,6 @@ public class User {
     private String lastName;
 
     @Basic
-    @Temporal(TemporalType.DATE)
-    @Column(name="birth_date", nullable=true)
-    private Date birthDate;
-
-
-    @Basic
     @Column(name="address", nullable = true, length = 150)
     private String address;
 

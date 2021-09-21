@@ -61,6 +61,10 @@ public class Movie {
     @Column(name="image_url", length = 2083, nullable = true)
     private String imageUrl;
 
+    @Basic
+    @Column(name="description", length = 3000, nullable=true)
+    private String description;
+
     @Version
     @Column(name="version", nullable = false)
     @JsonIgnore

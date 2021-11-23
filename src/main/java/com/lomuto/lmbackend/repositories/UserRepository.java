@@ -13,13 +13,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     //Username
     List<User> findByUsername(String username);
-    Page<User> findByUsername(String username, Pageable pageable);
     void deleteByUsername(String username);
     boolean existsByUsername(String username);
 
     //Email
     List<User> findByEmail(String email);
-    Page<User> findByEmail(String email, Pageable pageable);
     void deleteByEmail(String username);
     boolean existsByEmail(String email);
 

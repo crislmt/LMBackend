@@ -13,16 +13,13 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     //Title
-    List<Movie> findByTitle(String title);
     Page<Movie> findByTitle(String title, Pageable pageable);
-    List<Movie> findByTitleContaining(String title);
     Page<Movie> findByTitleContaining(String title, Pageable pageable);
     boolean existsByTitle(String title);
     void deleteByTitle(String title);
 
 
     //Director
-    List<Movie> findByDirector(String director);
     Page<Movie> findByDirector(String director, Pageable pageable);
 
     //Genre

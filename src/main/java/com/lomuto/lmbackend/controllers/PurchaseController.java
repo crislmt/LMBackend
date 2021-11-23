@@ -26,23 +26,16 @@ import java.util.List;
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
+    @Autowired
     private UserService userService;
 
-    @PostMapping("/buy") //FOR DEBUG
-    public ResponseEntity create(@Validated @RequestBody Purchase purchase){
-        try{
-            return new ResponseEntity<>(purchaseService.addPurchase(purchase), HttpStatus.OK);
-        }
-        catch(MovieQuantityUnavailableException e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity not available");
-        }
-    }
+
 
     @PostMapping("/addPurchase")
     @PreAuthorize("hasAnyAuthority('user')")
     public ResponseEntity addPurchase(@RequestBody List<MoviePurchase> movie_purchaseList){
         try{
-            User u= userService.getByEmail(Utils.getEmail());
+            User u= userService.getByUsername(Utils.getEmail());
             Purchase p=new Purchase();
             p.setUser(u);
             p.setPurchaseMovies(movie_purchaseList);

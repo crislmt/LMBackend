@@ -36,4 +36,11 @@ public class UserService {
         if(result.size()==0) throw new NoSuchUserException();
         return result.get(0);
     }
+
+    @Transactional(readOnly = true)
+    public User getByUsername(String username) throws NoSuchUserException{
+        List<User> result=userRepository.findByUsername(username);
+        if(result.size()==0) throw new NoSuchUserException();
+        return result.get(0);
+    }
 }

@@ -16,6 +16,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
     //PurchaseTime
     List<Purchase> findByPurchaseTime(Date date);
+
     @Query("select p from Purchase p where p.purchaseTime > ?1 and p.purchaseTime < ?2 and p.user = ?3")
     Page<Purchase> findByUserInPeriod(Date startDate, Date endDate, User user, Pageable pageable);
 

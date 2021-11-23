@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                //.antMatchers("/user/**").permitAll()
+                .antMatchers("/user/**").permitAll()
                 .antMatchers("/movies/**").permitAll()
                 .antMatchers("/purchases/**").permitAll()
                 .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(authenticationConverter());

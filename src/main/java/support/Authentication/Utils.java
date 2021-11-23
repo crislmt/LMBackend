@@ -1,5 +1,6 @@
 package support.Authentication;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +26,7 @@ public class Utils {
     public String getName() {
         return getTokenNode().get("claims").get("name").asText();
     }
+
 
     public String getEmail() {
         return getTokenNode().get("claims").get("email").asText();

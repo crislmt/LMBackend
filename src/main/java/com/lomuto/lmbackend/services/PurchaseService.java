@@ -2,6 +2,7 @@ package com.lomuto.lmbackend.services;
 
 
 import com.lomuto.lmbackend.entities.Movie;
+import com.lomuto.lmbackend.entities.MoviePurchase;
 import com.lomuto.lmbackend.entities.Purchase;
 import com.lomuto.lmbackend.entities.User;
 import com.lomuto.lmbackend.exceptions.IllegalDateException;
@@ -36,10 +37,9 @@ public class PurchaseService {
     @Transactional(readOnly = false)
     public Purchase addPurchase(Purchase purchase) throws MovieQuantityUnavailableException {
         Purchase result= purchaseRepository.save(purchase);
-        for(com.lomuto.lmbackend.entities.MoviePurchase mp: result.getPurchaseMovies()){
+        for(MoviePurchase mp: result.getPurchaseMovies()){
             mp.setPurchase(result);
-            com.lomuto.lmbackend.entities.MoviePurchase justAdded= moviePurchaseRepository.save(mp);
-            entityManager.refresh(justAdded);
+            MoviePurchase justAdded= moviePurchaseRepository.save(mp);
             Movie movie= justAdded.getMovie();
             int newQuantity=movie.getQuantity() - mp.getQuantity();
             if(newQuantity<0){

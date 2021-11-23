@@ -35,12 +35,12 @@ public class PurchaseController {
     @PreAuthorize("hasAnyAuthority('user')")
     public ResponseEntity addPurchase(@RequestBody List<MoviePurchase> movie_purchaseList){
         try{
-            User u= userService.getByUsername(Utils.getEmail());
+            User u= userService.getByEmail(Utils.getEmail());
             Purchase p=new Purchase();
             p.setUser(u);
             p.setPurchaseMovies(movie_purchaseList);
             purchaseService.addPurchase(p);
-            return new ResponseEntity(p, HttpStatus.OK);
+            return new ResponseEntity("Ok", HttpStatus.OK);
         }
         catch (MovieQuantityUnavailableException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity issue");
